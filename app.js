@@ -8,6 +8,10 @@ app.set('port', 5000);
 app.set("views", __dirname + '/views');
 app.set("view engine", "ejs");
 
+app.get("/", (req, res) => {
+    res.redirect("/todo/list");
+});
+
 // 정적 파일 제공 설정
 app.use(express.static('public'));
 
