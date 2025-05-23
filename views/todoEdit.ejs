@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>할 일 수정</title>
+  <link rel="stylesheet" href="https://unpkg.com/98.css" />
+  <style>
+    body {
+      background-color: #008080;
+      padding: 40px;
+    }
+    label {
+      display: block;
+      margin: 10px 0 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="window" style="width: 400px; margin: 0 auto;">
+    <div class="title-bar">
+      <div class="title-bar-text">🛠 할 일 수정</div>
+      <div class="title-bar-controls">
+        <button aria-label="Minimize"></button>
+        <button aria-label="Maximize"></button>
+        <button aria-label="Close"></button>
+      </div>
+    </div>
+    <div class="window-body">
+      <form action="update" method="post">
+        <input type="hidden" name="no" value="<%=todo.no%>">
+
+        <label>제목:</label>
+        <input type="text" name="title" class="input" value="<%=todo.title%>" style="width: 100%;" />
+
+            <label>완료 여부:</label>
+        <div>
+        <input type="radio" id="done-true" name="done" value="true" <%= todo.done ? "checked" : "" %> />
+        <label for="done-true">완료</label>
+        </div>
+        <div>
+        <input type="radio" id="done-false" name="done" value="false" <%= !todo.done ? "checked" : "" %> />
+        <label for="done-false">미완료</label>
+        </div>
+
+        <div style="margin-top: 20px;">
+          <input type="submit" class="button" value="💾 수정" />
+          <button id="delBtn" type="button" class="button">🗑 삭제</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    let delBtn = document.getElementById("delBtn");
+    delBtn.onclick = function () {
+      let form = this.closest("form");
+      form.action = "delete";
+      form.submit();
+    };
+  </script>
+</body>
+</html>
